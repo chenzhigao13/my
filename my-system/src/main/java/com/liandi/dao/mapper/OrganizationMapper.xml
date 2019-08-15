@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liandi.dao.OrganizationMapper">
+
+    <resultMap id="organizationMap" type="com.liandi.dao.domain.OrganizationDO">
+        <id property="id" column="id"/>
+        <result property="organizationName" column="organization_name"/>
+        <result property="parentOrganizationId" column="parent_organization_id"/>
+        <result property="sort" column="sort"/>
+        <association property="parentOrganization" column="parent_organization_id" select="" fetchType="lazy"/>
+    </resultMap>
+
+    <select id="countOrganization" parameterType="com.liandi.dao.param.ListPageOrganizationParam"
+            resultType="java.lang.Integer">
+        select count(*) from sys_organization o
+        <where>
+            <if test="parentOrganizationId != null and parentOrganizationId != ''">AND o.parent_organization_id =
+                #{parentOrganizationId}
+            </if>
+            <if test="organizationName != null and organizationName != ''">AND o.organization_name like
+                '%'||#{organizationName}||'%'
+            </if>
+        </where>
+    </select>
+
+    <select id="listPageOrganization" parameterType="com.liandi.dao.param.ListPageOrganizationParam"
+            resultMap="organizationMap">
+        select o.id, o.organization_name, o.parent_organization_id, o.sort from sys_organization o
+        <where>
+            <if test="parentOrganizationId != null and parentOrganizationId != ''">AND o.parent_organization_id =
+                #{parentOrganizationId}
+            </if>
+            <if test="organizationName != null and organizationName != ''">AND o.organization_name like
+                '%'||#{organizationName}||'%'
+            </if>
+        </where>
+        order by o.sort asc
+        limit #{startSize}, #{pageSize}
+    </select>
+
+    <select id="getOrganization" resultMap="organizationMap">
+        select o.id, o.organization_name, o.parent_organization_id, o.sort
+        from sys_organization o
+        where o.id = #{id}
+    </select>
+
+</mapper>

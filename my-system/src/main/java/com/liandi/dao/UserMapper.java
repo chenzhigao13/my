@@ -12,7 +12,7 @@ import com.liandi.dao.param.ListUserParam;
 /**
  * @author czg
  * @date 2019/7/16 9:59
- * @description 用户Dao接口
+ * @description 用户Mapper接口
  */
 @Repository
 public interface UserMapper extends BaseMapper<UserDO> {

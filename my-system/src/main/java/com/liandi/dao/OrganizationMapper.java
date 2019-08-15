@@ -12,7 +12,7 @@ import com.liandi.dao.param.ListPageOrganizationParam;
 /**
  * @author czg
  * @date 2019/7/25 10:35
- * @description 组织Dao接口
+ * @description 组织Mapper接口
  */
 @Repository
 public interface OrganizationMapper extends BaseMapper<OrganizationDO> {

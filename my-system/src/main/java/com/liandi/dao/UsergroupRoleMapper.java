@@ -8,7 +8,7 @@ import com.liandi.dao.domain.UsergroupRoleDO;
 /**
  * @author czg
  * @date 2019/7/25 13:53
- * @description 用户组与角色关联Dao接口
+ * @description 用户组与角色关联Mapper接口
  */
 @Repository
 public interface UsergroupRoleMapper extends BaseMapper<UsergroupRoleDO> {}

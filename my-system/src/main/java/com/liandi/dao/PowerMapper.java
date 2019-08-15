@@ -11,7 +11,7 @@ import com.liandi.dao.domain.PowerDO;
 /**
  * @author czg
  * @date 2019/7/25 10:17
- * @description 权限Dao接口
+ * @description 权限Mapper接口
  */
 @Repository
 public interface PowerMapper extends BaseMapper<PowerDO> {

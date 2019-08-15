@@ -8,7 +8,7 @@ import com.liandi.dao.domain.UsergroupDO;
 /**
  * @author czg
  * @date 2019/7/25 13:50
- * @description 用户组Dao接口
+ * @description 用户组Mapper接口
  */
 @Repository
 public interface UsergroupMapper extends BaseMapper<UsergroupDO> {}

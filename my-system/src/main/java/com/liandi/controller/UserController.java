@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.liandi.controller.request.QueryUserRequest;
 import com.liandi.controller.request.SaveUserRequest;
+import com.liandi.controller.request.SaveUserRoleRequest;
 import com.liandi.controller.request.UpdateUserRequest;
 import com.liandi.service.UserService;
 import com.liandi.service.dto.PageDTO;
@@ -43,6 +44,11 @@ public class UserController {
     @GetMapping("/deleteUser/{userId}")
     public void deleteUser(@NotNull(message = "ID不能为空") @PathVariable("userId") Long id) {
         userService.deleteUser(id);
+    }
+
+    @PostMapping("/saveUserRole")
+    public void saveRoleUser(@Valid @RequestBody SaveUserRoleRequest SaveUserRoleRequest) {
+        userService.saveUserRole(SaveUserRoleRequest);
     }
 
 }

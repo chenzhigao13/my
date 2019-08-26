@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * @author czg
@@ -14,6 +15,7 @@ import lombok.Data;
  */
 @Data
 @TableName("sys_role_organization")
+@Accessors(chain = true)
 public class RoleOrganizationDO {
 
     @TableId(value = "id", type = IdType.ID_WORKER)

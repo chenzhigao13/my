@@ -1,22 +1,21 @@
 package com.liandi.service.impl;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
+import com.google.common.collect.Lists;
+import com.liandi.controller.request.SaveRolePowerOrganizationRequest;
 import com.liandi.controller.request.SaveRoleRequest;
 import com.liandi.controller.request.UpdateRoleRequest;
-import com.liandi.dao.RoleMapper;
-import com.liandi.dao.RolePowerMapper;
-import com.liandi.dao.UserRoleMapper;
-import com.liandi.dao.UsergroupRoleMapper;
-import com.liandi.dao.domain.RoleDO;
-import com.liandi.dao.domain.RolePowerDO;
-import com.liandi.dao.domain.UserRoleDO;
-import com.liandi.dao.domain.UsergroupRoleDO;
+import com.liandi.dao.*;
+import com.liandi.dao.domain.*;
 import com.liandi.exception.SystemException;
 import com.liandi.response.ResponseEnum;
 import com.liandi.service.RoleService;
@@ -40,6 +39,9 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     private UsergroupRoleMapper usergroupRoleMapper;
+
+    @Autowired
+    private RoleOrganizationMapper roleOrganizationMapper;
 
     @Override
     public void saveRole(SaveRoleRequest saveRoleRequest) {
@@ -76,6 +78,40 @@ public class RoleServiceImpl implements RoleService {
         userRoleMapper.delete(new QueryWrapper<>(new UserRoleDO().setRoleId(id)));
 
         usergroupRoleMapper.delete(new QueryWrapper<>(new UsergroupRoleDO().setRoleId(id)));
+
+    }
+
+    @Transactional(rollbackFor = RuntimeException.class)
+    @Override
+    public void saveRolePowerAndOrganization(SaveRolePowerOrganizationRequest saveRolePowerOrganizationRequest) {
+
+        Long roleId = saveRolePowerOrganizationRequest.getRoleId();
+        if (Objects.isNull(roleMapper.selectById(roleId))) {
+            throw new SystemException("角色不存在", ResponseEnum.BUSINESS_ERROR_CODE);
+        }
+
+        rolePowerMapper.delete(new QueryWrapper<>(new RolePowerDO().setRoleId(roleId)));
+
+        roleOrganizationMapper.delete(new QueryWrapper<>(new RoleOrganizationDO().setRoleId(roleId)));
+
+        Set<Long> powerIdSet = saveRolePowerOrganizationRequest.getPowerIdSet();
+        List<RolePowerDO> rolePowerList = Lists.newArrayListWithCapacity(powerIdSet.size());
+        RolePowerDO rolePower;
+        for (Long powerId : powerIdSet) {
+            rolePower = new RolePowerDO().setId(IdWorker.getId()).setPowerId(powerId).setRoleId(roleId);
+            rolePowerList.add(rolePower);
+        }
+        rolePowerMapper.batchSaveRolePower(rolePowerList);
+
+        Set<Long> organizationIdSet = saveRolePowerOrganizationRequest.getOrganizationIdSet();
+        List<RoleOrganizationDO> roleOrganizationList = Lists.newArrayListWithCapacity(organizationIdSet.size());
+        RoleOrganizationDO roleOrganization;
+        for (Long organizationId : organizationIdSet) {
+            roleOrganization =
+                new RoleOrganizationDO().setId(IdWorker.getId()).setRoleId(roleId).setOrganizationId(organizationId);
+            roleOrganizationList.add(roleOrganization);
+        }
+        roleOrganizationMapper.batchSaveRoleOrganization(roleOrganizationList);
 
     }
 

@@ -1,5 +1,6 @@
 package com.liandi.service;
 
+import com.liandi.controller.request.SaveRolePowerOrganizationRequest;
 import com.liandi.controller.request.SaveRoleRequest;
 import com.liandi.controller.request.UpdateRoleRequest;
 
@@ -30,4 +31,12 @@ public interface RoleService {
      * @param id
      */
     void deleteRole(Long id);
+
+    /**
+     * 保存角色权限和组织关系
+     * 
+     * @param saveRolePowerOrganizationRequest
+     */
+    void saveRolePowerAndOrganization(SaveRolePowerOrganizationRequest saveRolePowerOrganizationRequest);
+
 }

@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import com.liandi.controller.request.SaveRolePowerOrganizationRequest;
 import com.liandi.controller.request.SaveRoleRequest;
 import com.liandi.controller.request.UpdateRoleRequest;
 import com.liandi.service.RoleService;
@@ -35,6 +36,12 @@ public class RoleController {
     @GetMapping("/deleteRole/{roleId}")
     public void deleteUser(@NotNull(message = "ID不能为空") @PathVariable("roleId") Long id) {
         roleService.deleteRole(id);
+    }
+
+    @PostMapping("/saveRolePowerAndOrganization")
+    public void saveRolePowerAndOrganization(
+        @Valid @RequestBody SaveRolePowerOrganizationRequest saveRolePowerOrganizationRequest) {
+        roleService.saveRolePowerAndOrganization(saveRolePowerOrganizationRequest);
     }
 
 }

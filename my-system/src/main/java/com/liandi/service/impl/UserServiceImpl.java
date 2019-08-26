@@ -1,9 +1,6 @@
 package com.liandi.service.impl;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.google.common.collect.Lists;
 import com.liandi.controller.request.QueryUserRequest;
 import com.liandi.controller.request.SaveUserRequest;
+import com.liandi.controller.request.SaveUserRoleRequest;
 import com.liandi.controller.request.UpdateUserRequest;
 import com.liandi.dao.UserMapper;
 import com.liandi.dao.UserRoleMapper;
@@ -136,6 +135,28 @@ public class UserServiceImpl implements UserService {
         userRoleMapper.delete(new QueryWrapper<>(new UserRoleDO().setUserId(id)));
 
         usergroupUserMapper.delete(new QueryWrapper<>(new UsergroupUserDO().setUserId(id)));
+
+    }
+
+    @Transactional(rollbackFor = RuntimeException.class)
+    @Override
+    public void saveUserRole(SaveUserRoleRequest saveUserRoleRequest) {
+
+        Long userId = saveUserRoleRequest.getUserId();
+        if (Objects.isNull(userMapper.selectById(userId))) {
+            throw new SystemException("用户不存在", ResponseEnum.BUSINESS_ERROR_CODE);
+        }
+
+        userRoleMapper.delete(new QueryWrapper<>(new UserRoleDO().setUserId(userId)));
+
+        Set<Long> roleIdSet = saveUserRoleRequest.getRoleIdSet();
+        List<UserRoleDO> userRoleList = Lists.newArrayListWithCapacity(roleIdSet.size());
+        UserRoleDO userRole;
+        for (Long roleId : roleIdSet) {
+            userRole = new UserRoleDO().setId(IdWorker.getId()).setRoleId(roleId).setUserId(userId);
+            userRoleList.add(userRole);
+        }
+        userRoleMapper.batchSaveUserRole(userRoleList);
 
     }
 

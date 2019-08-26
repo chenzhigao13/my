@@ -2,6 +2,7 @@ package com.liandi.service;
 
 import com.liandi.controller.request.QueryUserRequest;
 import com.liandi.controller.request.SaveUserRequest;
+import com.liandi.controller.request.SaveUserRoleRequest;
 import com.liandi.controller.request.UpdateUserRequest;
 import com.liandi.service.dto.PageDTO;
 import com.liandi.service.dto.UserDTO;
@@ -41,5 +42,12 @@ public interface UserService {
      * @param id
      */
     void deleteUser(Long id);
+
+    /**
+     * 保存用户角色关系
+     * 
+     * @param saveUserRoleRequest
+     */
+    void saveUserRole(SaveUserRoleRequest saveUserRoleRequest);
 
 }

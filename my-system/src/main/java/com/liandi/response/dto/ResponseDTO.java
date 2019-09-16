@@ -27,14 +27,12 @@ public class ResponseDTO<T> {
      */
     private T data;
 
-    public ResponseDTO(String message, Integer code) {
-        this(message, code, null);
+    public ResponseDTO(String message, ResponseEnum responseEnum) {
+        this(message, responseEnum.getCode(), null);
     }
 
-    private ResponseDTO(String message, Integer code, T data) {
-        this.message = message;
-        this.code = code;
-        this.data = data;
+    public ResponseDTO(String message, Integer code) {
+        this(message, code, null);
     }
 
     public ResponseDTO(ResponseEnum responseEnum) {
@@ -43,6 +41,12 @@ public class ResponseDTO<T> {
 
     public ResponseDTO(ResponseEnum responseEnum, T data) {
         this(responseEnum.getMessage(), responseEnum.getCode(), data);
+    }
+
+    private ResponseDTO(String message, Integer code, T data) {
+        this.message = message;
+        this.code = code;
+        this.data = data;
     }
 
 }

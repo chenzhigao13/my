@@ -2,10 +2,7 @@ package com.liandi.poitl;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +12,7 @@ import com.deepoove.poi.data.PictureRenderData;
 import com.deepoove.poi.data.RowRenderData;
 import com.deepoove.poi.data.style.Style;
 import com.deepoove.poi.data.style.TableStyle;
+import com.google.common.collect.Maps;
 import com.google.common.io.Files;
 import com.liandi.poitl.data.TableDetailData;
 import com.liandi.poitl.util.PoiTlUtil;
@@ -75,17 +73,17 @@ public class PoiTlUtilTest {
     @Test
     public void testGenerateWord() throws IOException {
 
-        String template = "/word/template.docx";
+        String template = "/poitl/template.docx";
         Model model = new Model();
         model.setDetailTable(detailTable);
         PictureRenderData pictureRenderData =
-            new PictureRenderData(780, 120, ".png", Files.toByteArray(new File("D://1559025205(1).png")));
+            new PictureRenderData(300, 300, ".png", Files.toByteArray(new File("D://test.jpg")));
         model.setImageKey(Arrays.asList(pictureRenderData, pictureRenderData));
         model.setNowDate(new Date());
         model.setSex(true);
-        // Map<String, String> m = Maps.newHashMap();
-        // m.put("k01", "测试map");
-        // model.setM(m);
+        Map<String, String> m = Maps.newHashMap();
+        m.put("k01", "测试map");
+        model.setM(m);
 
         Files.write(Objects.requireNonNull(PoiTlUtil.generateWord(template, model)), new File("D://poi-tl.docx"));
 
@@ -98,7 +96,7 @@ public class PoiTlUtilTest {
         private Date nowDate;
         private TableDetailData detailTable;
         // 使用 el 表达式时，不能用Map
-        // private Map<String, String> m;
+        private Map<String, String> m;
     }
 
 }

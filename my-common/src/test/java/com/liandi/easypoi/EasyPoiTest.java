@@ -1,5 +1,6 @@
 package com.liandi.easypoi;
 
+import java.io.File;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -10,33 +11,25 @@ import com.liandi.easypoi.entity.Course;
 import com.liandi.easypoi.entity.DataModel;
 import com.liandi.easypoi.entity.Extra;
 import com.liandi.easypoi.entity.Student;
-import com.liandi.easypoi.util.EasyPoiUtil;
 
+import cn.afterturn.easypoi.excel.ExcelImportUtil;
 import cn.afterturn.easypoi.excel.entity.ImportParams;
 
-public class EasyPoiUtilTest {
-
-    @Test
-    public void testImportExcel() {
-
-        ImportParams params = EasyPoiUtil.getImportParams();
-        params.setHeadRows(3);
-        List<Student> studentList = EasyPoiUtil.importExcel("D://testEasyPoi.xlsx", Student.class, params);
-
-        System.out.println("studentList：" + studentList);
-
-    }
+public class EasyPoiTest {
 
     @Test
     public void importExcel() {
 
-        List<DataModel> dataModelList =
-            EasyPoiUtil.importExcel("D://testEasyPoi.xlsx", DataModel.class, EasyPoiUtil.getImportParams());
+        ImportParams params = new ImportParams();
+        params.setHeadRows(1);
+        params.setNeedVerify(true);
 
-        System.out.println("dataModelList：" + dataModelList);
+        List<DataModel> dataModelList =
+            ExcelImportUtil.importExcel(new File("D://testEasyPoi.xlsx"), DataModel.class, params);
 
         List<Student> studentList = Lists.newArrayListWithCapacity(dataModelList.size());
-        dataModelList.forEach(dataModel -> {
+
+        for (DataModel dataModel : dataModelList) {
             if (StringUtils.isBlank(dataModel.getName())) {
 
                 if (studentList.isEmpty()) {
@@ -44,19 +37,21 @@ public class EasyPoiUtilTest {
                 }
 
                 List<Course> courseList = studentList.get(studentList.size() - 1).getCourseList();
-                String courseName = dataModel.getCourseName();
-                if (StringUtils.isBlank(courseName)) {
+                if (StringUtils.isBlank(dataModel.getCourseName())) {
 
                     Course course = courseList.get(courseList.size() - 1);
 
                     List<Extra> extraList = course.getExtraList();
                     extraList.add(new Extra().setGrade(dataModel.getGrade()));
 
+                    continue;
                 }
 
                 courseList.add(new Course().setScore(dataModel.getScore()).setCourseName(dataModel.getCourseName())
                     .setTeacher(dataModel.getTeacher())
                     .setExtraList(Lists.newArrayList(new Extra().setGrade(dataModel.getGrade()))));
+
+                continue;
 
             }
             List<Course> courseList = Lists.newArrayList(new Course().setCourseName(dataModel.getCourseName())
@@ -64,7 +59,7 @@ public class EasyPoiUtilTest {
                 .setExtraList(Lists.newArrayList(new Extra().setGrade(dataModel.getGrade()))));
             studentList.add(new Student().setName(dataModel.getName()).setCount(dataModel.getCount())
                 .setSex(dataModel.getSex()).setCourseList(courseList));
-        });
+        }
 
         System.out.println("studentList：" + studentList);
 

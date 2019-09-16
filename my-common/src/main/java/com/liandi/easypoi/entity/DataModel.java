@@ -3,14 +3,12 @@ package com.liandi.easypoi.entity;
 import java.io.Serializable;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
-import lombok.Data;
 
 /**
  * @author czg
  * @date 2019/8/16 10:52
  * @description 学生
  */
-@Data
 public class DataModel implements Serializable {
 
     @Excel(name = "姓名", isImportField = "true_st")
@@ -34,4 +32,66 @@ public class DataModel implements Serializable {
     @Excel(name = "附加分", isImportField = "true_st")
     private String grade;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getCount() {
+        return count;
+    }
+
+    public void setCount(String count) {
+        this.count = count;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public String getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(String teacher) {
+        this.teacher = teacher;
+    }
+
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    @Override
+    public String toString() {
+        return "DataModel{" + "name='" + name + '\'' + ", sex='" + sex + '\'' + ", count='" + count + '\''
+            + ", courseName='" + courseName + '\'' + ", teacher='" + teacher + '\'' + ", score='" + score + '\''
+            + ", grade='" + grade + '\'' + '}';
+    }
 }

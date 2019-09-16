@@ -5,7 +5,6 @@ import javax.servlet.ServletException;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.web.filter.DelegatingFilterProxy;
 
 /**
  * @author czg
@@ -22,7 +21,5 @@ public class ServletInitializer extends SpringBootServletInitializer {
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         super.onStartup(servletContext);
-
-        servletContext.addFilter("shiroFilter", new DelegatingFilterProxy("shiroFilter"));
     }
 }

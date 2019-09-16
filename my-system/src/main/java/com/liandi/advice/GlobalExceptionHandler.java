@@ -42,7 +42,7 @@ public class GlobalExceptionHandler {
         StringBuilder errorMsg = new StringBuilder();
         errors.forEach(error -> errorMsg.append(error.getDefaultMessage()).append(";"));
 
-        return new ResponseDTO(errorMsg.toString(), ResponseEnum.PARAM_VALID_ERROR.getCode());
+        return new ResponseDTO(errorMsg.toString(), ResponseEnum.PARAM_VALID_ERROR);
     }
 
     @ExceptionHandler(Exception.class)

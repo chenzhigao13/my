@@ -1,4 +1,4 @@
-package com.liandi.design.mode.decker.base;
+package com.liandi.design.mode.decker;
 
 /**
  * 饮料抽象类，装饰者模式
@@ -8,7 +8,7 @@ package com.liandi.design.mode.decker.base;
  */
 public abstract class Beverage {
 
-    protected String description = "unknown Beverage";
+    String description = "unknown Beverage";
 
     public String getDescription() {
         return description;

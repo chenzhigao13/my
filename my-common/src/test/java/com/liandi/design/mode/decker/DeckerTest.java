@@ -2,8 +2,6 @@ package com.liandi.design.mode.decker;
 
 import org.junit.Test;
 
-import com.liandi.design.mode.decker.base.Beverage;
-
 /**
  * 装饰者模式测试类
  * 

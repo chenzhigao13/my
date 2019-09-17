@@ -1,4 +1,4 @@
-package com.liandi.design.mode.decker.base;
+package com.liandi.design.mode.decker;
 
 /**
  * 调料抽检类，装饰者模式

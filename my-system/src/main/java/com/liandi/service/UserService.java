@@ -50,4 +50,12 @@ public interface UserService {
      */
     void saveUserRole(SaveUserRoleRequest saveUserRoleRequest);
 
+    /**
+     * 根据登陆名查询用户
+     * 
+     * @param loginName
+     * @return
+     */
+    UserDTO getUserByLoginName(String loginName);
+
 }

@@ -160,6 +160,11 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
+    public UserDTO getUserByLoginName(String loginName) {
+        return userDo2UserDTO(userMapper.getUserByLoginName(loginName));
+    }
+
     private List<UserDTO> userDo2UserDTO(List<UserDO> userList) {
         List<UserDTO> userDtoList = Lists.newArrayListWithCapacity(userList.size());
 
@@ -173,6 +178,20 @@ public class UserServiceImpl implements UserService {
             userDtoList.add(userDTO);
         }
         return userDtoList;
+    }
+
+    private UserDTO userDo2UserDTO(UserDO user) {
+        if (Objects.isNull(user)) {
+            return null;
+        }
+
+        UserDTO userDTO = new UserDTO();
+        userDTO.setEmail(user.getEmail()).setId(user.getId()).setLoginName(user.getLoginName())
+            .setOrganizationId(user.getOrganizationId()).setPhone(user.getPhone()).setUserCode(user.getUserCode())
+            .setUserName(user.getUserName()).setPowerSet(user.getPowerUrlSet()).setRoleSet(user.getRoleCodeSet())
+            .setPswd(user.getPswd());
+
+        return userDTO;
     }
 
 }

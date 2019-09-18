@@ -2,6 +2,8 @@ package com.liandi.advice;
 
 import java.util.List;
 
+import org.apache.shiro.ShiroException;
+import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -22,6 +24,18 @@ import lombok.extern.slf4j.Slf4j;
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(ShiroException.class)
+    public ResponseDTO handleShiroException(ShiroException e) {
+        log.error("shiro鉴权或授权过程出错：", e);
+        return new ResponseDTO(ResponseEnum.SHIRO_ERROR);
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseDTO handleUnauthorizedException(UnauthorizedException e) {
+        log.error("用户没有访问权限：", e);
+        return new ResponseDTO(ResponseEnum.SHIRO_UNAUTHORIZED_ERROR);
+    }
 
     @ExceptionHandler(SystemException.class)
     public ResponseDTO systemExceptionHandler(SystemException e) {

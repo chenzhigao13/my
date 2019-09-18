@@ -26,6 +26,9 @@ public class RoleDO {
     @TableField("role_name")
     private String roleName;
 
+    @TableField("role_code")
+    private String roleCode;
+
     @TableField(exist = false)
     private List<PowerDO> powerList;
 

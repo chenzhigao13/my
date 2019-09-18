@@ -1,6 +1,7 @@
 package com.liandi.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -24,6 +25,20 @@ public interface PowerMapper extends BaseMapper<PowerDO> {
      */
     List<PowerDO> listPowerByRoleId(@Param("roleId") Long roleId);
 
+    /**
+     * 查询权限
+     * 
+     * @param id
+     * @return
+     */
     PowerDO getPower(@Param("id") Long id);
+
+    /**
+     * 查询权限url
+     * 
+     * @param userId
+     * @return
+     */
+    Set<String> listPowerUrl(@Param("userId") Long userId);
 
 }

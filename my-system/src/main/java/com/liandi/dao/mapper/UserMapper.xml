@@ -15,6 +15,10 @@
                      select="com.liandi.dao.OrganizationMapper.getOrganization" fetchType="lazy"/>
         <collection property="roleList" column="id" select="com.liandi.dao.RoleMapper.listRoleByUserId"
                     fetchType="lazy"/>
+        <collection property="roleCodeSet" column="id" select="com.liandi.dao.RoleMapper.listRoleCode"
+                    fetchType="lazy"/>
+        <collection property="powerUrlSet" column="id" select="com.liandi.dao.PowerMapper.listPowerUrl"
+                    fetchType="lazy"/>
     </resultMap>
 
     <select id="countUser" parameterType="com.liandi.dao.param.ListPageUserParam" resultType="java.lang.Integer">
@@ -51,5 +55,17 @@
         </where>
     </select>
 
+    <select id="getUserByLoginName" resultMap="userMap">
+        select u.id,
+               user_code,
+               user_name,
+               login_name,
+               pswd,
+               organization_id,
+               phone,
+               email
+        from sys_user u
+        where u.login_name = #{loginName}
+    </select>
 
 </mapper>

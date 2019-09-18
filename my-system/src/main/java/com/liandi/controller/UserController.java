@@ -3,13 +3,13 @@ package com.liandi.controller;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.liandi.controller.request.QueryUserRequest;
-import com.liandi.controller.request.SaveUserRequest;
-import com.liandi.controller.request.SaveUserRoleRequest;
-import com.liandi.controller.request.UpdateUserRequest;
+import com.liandi.controller.request.*;
 import com.liandi.service.UserService;
 import com.liandi.service.dto.PageDTO;
 import com.liandi.service.dto.UserDTO;
@@ -49,6 +49,26 @@ public class UserController {
     @PostMapping("/saveUserRole")
     public void saveRoleUser(@Valid @RequestBody SaveUserRoleRequest SaveUserRoleRequest) {
         userService.saveUserRole(SaveUserRoleRequest);
+    }
+
+    @PostMapping("/login")
+    public void login(@Valid @RequestBody LoginRequest loginRequest) {
+        // TODO
+
+        // 1.获取Subject
+        Subject subject = SecurityUtils.getSubject();
+        // 2.封装用户数据
+        UsernamePasswordToken token = new UsernamePasswordToken(loginRequest.getLoginName(), loginRequest.getPswd());
+        // 3.执行登录方法
+        subject.login(token);
+    }
+
+    @PostMapping("/logout")
+    public void logout() {
+        Subject subject = SecurityUtils.getSubject();
+        if (subject != null) {
+            subject.logout();
+        }
     }
 
 }

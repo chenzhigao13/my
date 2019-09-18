@@ -2,6 +2,7 @@ package com.liandi.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -40,5 +41,13 @@ public interface UserMapper extends BaseMapper<UserDO> {
      * @return
      */
     List<UserDO> listUser(ListUserParam listUserParam);
+
+    /**
+     * 根据登陆名查询用户
+     * 
+     * @param loginName
+     * @return
+     */
+    UserDO getUserByLoginName(@Param("loginName") String loginName);
 
 }

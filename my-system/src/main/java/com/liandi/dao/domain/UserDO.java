@@ -1,6 +1,7 @@
 package com.liandi.dao.domain;
 
 import java.util.List;
+import java.util.Set;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -46,5 +47,11 @@ public class UserDO {
 
     @TableField(exist = false)
     private OrganizationDO organization;
+
+    @TableField(exist = false)
+    private Set<String> roleCodeSet;
+
+    @TableField(exist = false)
+    private Set<String> powerUrlSet;
 
 }

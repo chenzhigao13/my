@@ -17,4 +17,8 @@ public class SaveRoleRequest {
     @Size(max = 128, message = "角色名称最大长度128")
     private String roleName;
 
+    @NotBlank(message = "角色编号不能为空")
+    @Size(max = 128, message = "角色编号最大长度32")
+    private String roleCode;
+
 }

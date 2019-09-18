@@ -1,5 +1,7 @@
 package com.liandi.service.dto;
 
+import java.util.Set;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -20,6 +22,8 @@ public class UserDTO {
 
     private String loginName;
 
+    private String pswd;
+
     private Long organizationId;
 
     private String phone;
@@ -27,5 +31,9 @@ public class UserDTO {
     private String email;
 
     private String organizationName;
+
+    private Set<String> roleSet;
+
+    private Set<String> powerSet;
 
 }

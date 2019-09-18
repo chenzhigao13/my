@@ -1,7 +1,9 @@
 package com.liandi.dao;
 
 import java.util.List;
+import java.util.Set;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -21,6 +23,14 @@ public interface RoleMapper extends BaseMapper<RoleDO> {
      * @param userId
      * @return
      */
-    List<RoleDO> listRoleByUserId(Long userId);
+    List<RoleDO> listRoleByUserId(@Param("userId") Long userId);
+
+    /**
+     * 查询角色编号
+     * 
+     * @param userId
+     * @return
+     */
+    Set<String> listRoleCode(@Param("userId") Long userId);
 
 }

@@ -20,6 +20,14 @@ public enum ResponseEnum {
      */
     HTTP_MESSAGE_NOT_READABLE_ERROR("请求体缺失", 422),
     /**
+     * 鉴权或授权过程出错
+     */
+    SHIRO_ERROR("鉴权或授权过程出错", 2999),
+    /**
+     * 用户没有访问权限
+     */
+    SHIRO_UNAUTHORIZED_ERROR("用户没有访问权限", 2998),
+    /**
      * 参数校验错误
      */
     PARAM_VALID_ERROR(306),

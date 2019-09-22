@@ -1,8 +1,5 @@
 package com.liandi.design.mode.decker;
 
-import com.liandi.design.mode.decker.base.Beverage;
-import com.liandi.design.mode.decker.base.CondimentDecorator;
-
 /**
  * Whip
  * 

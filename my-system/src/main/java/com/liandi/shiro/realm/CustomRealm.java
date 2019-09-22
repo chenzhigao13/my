@@ -82,21 +82,14 @@ public class CustomRealm extends AuthorizingRealm {
         String loginName = upToken.getUsername();
 
         if (StringUtils.isBlank(loginName)) {
-            throw new AccountException("用户名和密码不能为空");
+            throw new AccountException("登陆名不能为空");
         }
 
         UserDTO user = userService.getUserByLoginName(loginName);
 
         if (user == null) {
-            throw new UnknownAccountException("用户名和密码不正确");
+            throw new UnknownAccountException("登陆名和密码不正确");
         }
-
-        // 查询用户的角色和权限存到SimpleAuthenticationInfo中，这样在其它地方
-        // SecurityUtils.getSubject().getPrincipal()就能拿出用户的所有信息，包括角色和权限
-        // Set<String> roles = roleService.getRolesByUserId(user.getId());
-        // Set<String> perms = permService.getPermsByUserId(user.getId());
-        // user.getRoleSet().addAll(roles);
-        // user.getPowerSet().addAll(perms);
 
         return new SimpleAuthenticationInfo(user, user.getPswd(), ByteSource.Util.bytes(salt), getName());
     }

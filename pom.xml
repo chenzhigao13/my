@@ -16,6 +16,11 @@
     <packaging>pom</packaging>
     <name>my</name>
 
+    <modules>
+        <module>my-common</module>
+        <module>my-system</module>
+    </modules>
+
     <properties>
         <java.version>1.8</java.version>
         <guava.version>23.6-jre</guava.version>
@@ -28,10 +33,17 @@
         <easypoi.version>4.0.0</easypoi.version>
         <poitl.version>1.6.0-beta1</poitl.version>
         <shiro.version>1.4.1</shiro.version>
+        <my.version>0.0.1-SNAPSHOT</my.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>com.liandi</groupId>
+                <artifactId>my-common</artifactId>
+                <version>${my.version}</version>
+            </dependency>
 
             <!-- mysql -->
             <dependency>

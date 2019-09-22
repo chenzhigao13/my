@@ -1,7 +1,5 @@
 package com.liandi.design.mode.observer.observer;
 
-import com.liandi.design.mode.observer.observer.base.Observer;
-
 /**
  * A 观察者
  * 

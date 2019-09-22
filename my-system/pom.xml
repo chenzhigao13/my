@@ -33,6 +33,11 @@
             <scope>compile</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.liandi</groupId>
+            <artifactId>my-common</artifactId>
+        </dependency>
+
         <!-- shiro -->
         <dependency>
             <groupId>org.apache.shiro</groupId>

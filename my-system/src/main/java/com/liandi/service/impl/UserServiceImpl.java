@@ -3,6 +3,9 @@ package com.liandi.service.impl;
 import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -12,10 +15,7 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.google.common.collect.Lists;
-import com.liandi.controller.request.QueryUserRequest;
-import com.liandi.controller.request.SaveUserRequest;
-import com.liandi.controller.request.SaveUserRoleRequest;
-import com.liandi.controller.request.UpdateUserRequest;
+import com.liandi.controller.request.*;
 import com.liandi.dao.UserMapper;
 import com.liandi.dao.UserRoleMapper;
 import com.liandi.dao.UsergroupUserMapper;
@@ -163,6 +163,24 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO getUserByLoginName(String loginName) {
         return userDo2UserDTO(userMapper.getUserByLoginName(loginName));
+    }
+
+    @Override
+    public void login(LoginRequest loginRequest) {
+        // 1.获取Subject
+        Subject subject = SecurityUtils.getSubject();
+        // 2.封装用户数据
+        UsernamePasswordToken token = new UsernamePasswordToken(loginRequest.getLoginName(), loginRequest.getPswd());
+        // 3.执行登录方法
+        subject.login(token);
+    }
+
+    @Override
+    public void logout() {
+        Subject subject = SecurityUtils.getSubject();
+        if (subject != null) {
+            subject.logout();
+        }
     }
 
     private List<UserDTO> userDo2UserDTO(List<UserDO> userList) {

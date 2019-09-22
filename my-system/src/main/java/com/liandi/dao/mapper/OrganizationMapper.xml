@@ -7,7 +7,8 @@
         <result property="organizationName" column="organization_name"/>
         <result property="parentOrganizationId" column="parent_organization_id"/>
         <result property="sort" column="sort"/>
-        <association property="parentOrganization" column="parent_organization_id" select="" fetchType="lazy"/>
+        <association property="parentOrganization" column="parent_organization_id"
+                     select="com.liandi.dao.OrganizationMapper.getOrganization" fetchType="lazy"/>
     </resultMap>
 
     <select id="countOrganization" parameterType="com.liandi.dao.param.ListPageOrganizationParam"

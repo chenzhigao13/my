@@ -25,16 +25,15 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(ShiroException.class)
-    public ResponseDTO handleShiroException(ShiroException e) {
-        log.error("shiro鉴权或授权过程出错：", e);
-        return new ResponseDTO(ResponseEnum.SHIRO_ERROR);
-    }
-
     @ExceptionHandler(UnauthorizedException.class)
     public ResponseDTO handleUnauthorizedException(UnauthorizedException e) {
-        log.error("用户没有访问权限：", e);
-        return new ResponseDTO(ResponseEnum.SHIRO_UNAUTHORIZED_ERROR);
+        return new ResponseDTO(ResponseEnum.SHIRO_UNAUTHC_ERROR);
+    }
+
+    @ExceptionHandler(ShiroException.class)
+    public ResponseDTO handleShiroException(ShiroException e) {
+        log.error("鉴权或授权过程出错：", e);
+        return new ResponseDTO(ResponseEnum.SHIRO_ERROR);
     }
 
     @ExceptionHandler(SystemException.class)

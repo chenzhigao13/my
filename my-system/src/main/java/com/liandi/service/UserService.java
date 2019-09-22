@@ -1,9 +1,6 @@
 package com.liandi.service;
 
-import com.liandi.controller.request.QueryUserRequest;
-import com.liandi.controller.request.SaveUserRequest;
-import com.liandi.controller.request.SaveUserRoleRequest;
-import com.liandi.controller.request.UpdateUserRequest;
+import com.liandi.controller.request.*;
 import com.liandi.service.dto.PageDTO;
 import com.liandi.service.dto.UserDTO;
 
@@ -57,5 +54,17 @@ public interface UserService {
      * @return
      */
     UserDTO getUserByLoginName(String loginName);
+
+    /**
+     * 登陆
+     * 
+     * @param loginRequest
+     */
+    void login(LoginRequest loginRequest);
+
+    /**
+     * 登出
+     */
+    void logout();
 
 }

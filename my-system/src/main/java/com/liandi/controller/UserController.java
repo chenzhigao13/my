@@ -3,9 +3,7 @@ package com.liandi.controller;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,6 +39,7 @@ public class UserController {
         userService.updateUser(updateUserRequest);
     }
 
+    @RequiresPermissions("user:deleteUser")
     @GetMapping("/deleteUser/{userId}")
     public void deleteUser(@NotNull(message = "ID不能为空") @PathVariable("userId") Long id) {
         userService.deleteUser(id);
@@ -53,22 +52,12 @@ public class UserController {
 
     @PostMapping("/login")
     public void login(@Valid @RequestBody LoginRequest loginRequest) {
-        // TODO
-
-        // 1.获取Subject
-        Subject subject = SecurityUtils.getSubject();
-        // 2.封装用户数据
-        UsernamePasswordToken token = new UsernamePasswordToken(loginRequest.getLoginName(), loginRequest.getPswd());
-        // 3.执行登录方法
-        subject.login(token);
+        userService.login(loginRequest);
     }
 
     @PostMapping("/logout")
     public void logout() {
-        Subject subject = SecurityUtils.getSubject();
-        if (subject != null) {
-            subject.logout();
-        }
+        userService.logout();
     }
 
 }

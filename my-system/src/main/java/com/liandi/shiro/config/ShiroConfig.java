@@ -4,14 +4,20 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.cache.CacheManager;
+import org.apache.shiro.cache.MemoryConstrainedCacheManager;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.realm.Realm;
+import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.liandi.shiro.filter.CustomAuthenticationFilter;
+import com.liandi.shiro.filter.KickoutSessionFilter;
+import com.liandi.shiro.manager.CustomSessionManager;
 import com.liandi.shiro.realm.CustomRealm;
 
 /**
@@ -22,6 +28,16 @@ import com.liandi.shiro.realm.CustomRealm;
  */
 @Configuration
 public class ShiroConfig {
+
+    @Bean
+    public SessionManager sessionManager() {
+        return new CustomSessionManager();
+    }
+
+    @Bean
+    public CacheManager cacheManager() {
+        return new MemoryConstrainedCacheManager();
+    }
 
     @Bean
     public HashedCredentialsMatcher hashedCredentialsMatcher() {
@@ -40,17 +56,24 @@ public class ShiroConfig {
     }
 
     @Bean
-    public Realm realm(HashedCredentialsMatcher credentialsMatcher) {
+    public Realm realm() {
         CustomRealm customRealm = new CustomRealm();
-        customRealm.setCredentialsMatcher(credentialsMatcher);
+        customRealm.setCredentialsMatcher(hashedCredentialsMatcher());
         return customRealm;
     }
 
     @Bean
-    public DefaultWebSecurityManager getDefaultWebSecurityManager(Realm realm) {
+    public DefaultWebSecurityManager defaultWebSecurityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        // 关联Realm.
-        securityManager.setRealm(realm);
+        // 自定义Realm.
+        securityManager.setRealm(realm());
+        // 自定义缓存管理器 可以使用redis
+        securityManager.setCacheManager(cacheManager());
+        // 自定义Session管理 可以使用redis
+        securityManager.setSessionManager(sessionManager());
+        // Cookie记住我管理器
+        // securityManager.setRememberMeManager(rememberMeManager());
+
         return securityManager;
     }
 
@@ -61,6 +84,11 @@ public class ShiroConfig {
 
         // 设置 SecurityManager
         shiroFilterFactoryBean.setSecurityManager(securityManager);
+
+        // 添加kickout踢出过滤器
+        shiroFilterFactoryBean.getFilters().put("kickout", newKickoutSessionFilter());
+        // 添加authc自定义过滤器
+        shiroFilterFactoryBean.getFilters().put("authc", new CustomAuthenticationFilter());
 
         /*
          * anon：匿名用户可访问
@@ -76,10 +104,10 @@ public class ShiroConfig {
         filterMap.put("/admin/**", "authc, roles[admin]");
         // /docs/** 接口登陆的用户须有document:read权限
         filterMap.put("/docs/**", "authc, perms[document:read]");
+        // 剩余的所有接口须用户登陆
+        filterMap.put("/**", "kickout,authc");
         // /sys/user/logout 登出接口
         filterMap.put("/sys/user/logout", "logout");
-        // 剩余的所有接口须用户登陆
-        filterMap.put("/**", "authc");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
 
@@ -87,16 +115,21 @@ public class ShiroConfig {
     }
 
     @Bean
-    public static DefaultAdvisorAutoProxyCreator getDefaultAdvisorAutoProxyCreator() {
+    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
         DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
-        /*
-         * setUsePrefix(false)用于解决一个奇怪的bug。在引入spring aop的情况下。
-         * 在@Controller注解的类的方法中加入@RequiresRole等shiro注解，会导致该方法无法映射请求，导致返回404。 加入这项配置能解决这个bug
-         */
-        defaultAdvisorAutoProxyCreator.setUsePrefix(true);
-        // defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);
+
+        // 开启Shiro的注解(如@RequiresRoles,@RequiresPermissions)
+        defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);
 
         return defaultAdvisorAutoProxyCreator;
+    }
+
+    private KickoutSessionFilter newKickoutSessionFilter() {
+        KickoutSessionFilter kickoutSessionFilter = new KickoutSessionFilter();
+        kickoutSessionFilter.setSessionManager(sessionManager());
+        kickoutSessionFilter.setCacheManager(cacheManager());
+
+        return kickoutSessionFilter;
     }
 
 }

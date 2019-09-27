@@ -1,9 +1,7 @@
-package com.liandi.design.mode.observer.observer;
+package com.liandi.design.mode.observer.impl;
 
 import java.util.Observable;
 import java.util.Observer;
-
-import com.liandi.design.mode.observer.subject.WeatherObservable;
 
 /**
  * D 观察者，使用java内置观察者模式

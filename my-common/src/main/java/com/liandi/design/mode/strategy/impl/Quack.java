@@ -1,4 +1,6 @@
-package com.liandi.design.mode.strategy;
+package com.liandi.design.mode.strategy.impl;
+
+import com.liandi.design.mode.strategy.QuackBehavior;
 
 /**
  * 呱呱叫

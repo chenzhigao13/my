@@ -8,9 +8,9 @@ import java.util.Objects;
 import com.deepoove.poi.XWPFTemplate;
 import com.deepoove.poi.config.Configure;
 import com.deepoove.poi.config.ELMode;
-import com.liandi.CloseableUtil;
 import com.liandi.poitl.policy.DetailTablePolicy;
 import com.liandi.poitl.policy.PictureListRenderPolicy;
+import com.liandi.util.CloseableUtil;
 
 import lombok.extern.slf4j.Slf4j;
 

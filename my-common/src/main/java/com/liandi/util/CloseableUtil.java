@@ -1,4 +1,4 @@
-package com.liandi;
+package com.liandi.util;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -7,9 +7,10 @@ import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 
 /**
+ * Closeable 工具类
+ * 
  * @author czg
  * @date 2019/8/19 11:18
- * @description Closeable 工具类
  */
 @Slf4j
 public class CloseableUtil {

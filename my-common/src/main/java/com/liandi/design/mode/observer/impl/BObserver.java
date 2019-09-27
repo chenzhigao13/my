@@ -1,4 +1,6 @@
-package com.liandi.design.mode.observer.observer;
+package com.liandi.design.mode.observer.impl;
+
+import com.liandi.design.mode.observer.Observer;
 
 /**
  * B 观察者

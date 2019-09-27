@@ -2,10 +2,7 @@ package com.liandi.design.mode.observer;
 
 import org.junit.Test;
 
-import com.liandi.design.mode.observer.observer.*;
-import com.liandi.design.mode.observer.subject.Subject;
-import com.liandi.design.mode.observer.subject.Weather;
-import com.liandi.design.mode.observer.subject.WeatherObservable;
+import com.liandi.design.mode.observer.impl.*;
 
 /**
  * 观察者策略测试类

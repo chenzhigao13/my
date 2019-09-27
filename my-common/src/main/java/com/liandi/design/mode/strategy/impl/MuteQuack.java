@@ -1,4 +1,6 @@
-package com.liandi.design.mode.strategy;
+package com.liandi.design.mode.strategy.impl;
+
+import com.liandi.design.mode.strategy.QuackBehavior;
 
 /**
  * 不会叫
@@ -7,7 +9,7 @@ package com.liandi.design.mode.strategy;
  * @date 2019年7月1日
  *
  */
-public final class MuteQuack implements QuackBehavior {
+public class MuteQuack implements QuackBehavior {
 
     @Override
     public void quack() {

@@ -1,9 +1,10 @@
-package com.liandi.design.mode.observer.subject;
+package com.liandi.design.mode.observer.impl;
 
 import java.util.List;
 
 import com.google.common.collect.Lists;
-import com.liandi.design.mode.observer.observer.Observer;
+import com.liandi.design.mode.observer.Observer;
+import com.liandi.design.mode.observer.Subject;
 
 /**
  * 天气主题

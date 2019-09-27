@@ -1,4 +1,4 @@
-package com.liandi.design.mode.observer.subject;
+package com.liandi.design.mode.observer.impl;
 
 import java.util.Observable;
 

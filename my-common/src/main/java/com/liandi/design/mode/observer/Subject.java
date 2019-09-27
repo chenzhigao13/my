@@ -1,6 +1,4 @@
-package com.liandi.design.mode.observer.subject;
-
-import com.liandi.design.mode.observer.observer.Observer;
+package com.liandi.design.mode.observer;
 
 /**
  * 主题接口

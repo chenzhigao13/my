@@ -1,4 +1,8 @@
-package com.liandi.design.mode.strategy;
+package com.liandi.design.mode.strategy.impl;
+
+import com.liandi.design.mode.strategy.AbstractDuck;
+import com.liandi.design.mode.strategy.FlyBehavior;
+import com.liandi.design.mode.strategy.QuackBehavior;
 
 /**
  * 野鸭

@@ -1,4 +1,4 @@
-package com.liandi.design.mode.observer.observer;
+package com.liandi.design.mode.observer;
 
 /**
  * 观察者接口

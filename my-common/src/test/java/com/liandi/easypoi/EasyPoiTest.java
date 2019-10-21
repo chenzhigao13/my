@@ -7,10 +7,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
-import com.liandi.easypoi.entity.Course;
-import com.liandi.easypoi.entity.DataModel;
-import com.liandi.easypoi.entity.Extra;
-import com.liandi.easypoi.entity.Student;
+import com.liandi.common.easypoi.entity.Course;
+import com.liandi.common.easypoi.entity.DataModel;
+import com.liandi.common.easypoi.entity.Extra;
+import com.liandi.common.easypoi.entity.Student;
 
 import cn.afterturn.easypoi.excel.ExcelImportUtil;
 import cn.afterturn.easypoi.excel.entity.ImportParams;

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liandi.system.dao.RoleOrganizationMapper">
+
+
+    <insert id="batchSaveRoleOrganization">
+        insert into sys_role_organization(id, role_id, organization_id)
+        values
+        <foreach collection="roleOrganizationList" item="roleOrganization" separator=",">
+            (roleOrganization.id, roleOrganization.roleId, roleOrganization.organizationId)
+        </foreach>
+    </insert>
+
+</mapper>

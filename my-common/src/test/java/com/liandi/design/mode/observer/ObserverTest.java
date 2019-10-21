@@ -1,8 +1,9 @@
 package com.liandi.design.mode.observer;
 
+import com.liandi.common.design.mode.observer.Observer;
+import com.liandi.common.design.mode.observer.Subject;
+import com.liandi.common.design.mode.observer.impl.*;
 import org.junit.Test;
-
-import com.liandi.design.mode.observer.impl.*;
 
 /**
  * 观察者策略测试类

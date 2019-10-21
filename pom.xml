@@ -34,6 +34,7 @@
         <poitl.version>1.6.0-beta1</poitl.version>
         <shiro.version>1.4.1</shiro.version>
         <my.version>0.0.1-SNAPSHOT</my.version>
+        <quartz.version>2.3.0</quartz.version>
     </properties>
 
     <dependencyManagement>
@@ -113,6 +114,18 @@
                 <groupId>org.apache.shiro</groupId>
                 <artifactId>shiro-spring-boot-starter</artifactId>
                 <version>${shiro.version}</version>
+            </dependency>
+
+            <!-- 定时任务 -->
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>${quartz.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz-jobs</artifactId>
+                <version>${quartz.version}</version>
             </dependency>
 
         </dependencies>

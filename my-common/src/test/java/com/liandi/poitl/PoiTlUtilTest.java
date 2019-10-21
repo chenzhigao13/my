@@ -14,8 +14,8 @@ import com.deepoove.poi.data.style.Style;
 import com.deepoove.poi.data.style.TableStyle;
 import com.google.common.collect.Maps;
 import com.google.common.io.Files;
-import com.liandi.poitl.data.TableDetailData;
-import com.liandi.poitl.util.PoiTlUtil;
+import com.liandi.common.poitl.data.TableDetailData;
+import com.liandi.common.poitl.util.PoiTlUtil;
 
 import lombok.Data;
 

@@ -1,5 +1,6 @@
 package com.liandi.design.mode.decker;
 
+import com.liandi.common.design.mode.decker.*;
 import org.junit.Test;
 
 /**

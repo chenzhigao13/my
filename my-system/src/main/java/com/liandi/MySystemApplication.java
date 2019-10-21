@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @EnableTransactionManagement
 @SpringBootApplication
-@MapperScan("com.liandi.dao")
+@MapperScan("com.liandi.*.dao")
 @ServletComponentScan("com.liandi")
 public class MySystemApplication {
 

@@ -10,9 +10,10 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.liandi.system.dao.domain.PowerDO;
 
 /**
+ * 权限Mapper接口
+ * 
  * @author czg
  * @date 2019/7/25 10:17
- * @description 权限Mapper接口
  */
 @Repository
 public interface PowerMapper extends BaseMapper<PowerDO> {

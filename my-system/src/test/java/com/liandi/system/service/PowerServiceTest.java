@@ -1,4 +1,4 @@
-package com.liandi.system.service.impl;
+package com.liandi.system.service;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,12 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.google.gson.Gson;
 import com.liandi.MySystemApplicationTests;
 import com.liandi.system.controller.request.SavePowerRequest;
-import com.liandi.system.service.PowerService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class PowerServiceImplTest extends MySystemApplicationTests {
+public class PowerServiceTest extends MySystemApplicationTests {
 
     @Autowired
     private PowerService powerService;

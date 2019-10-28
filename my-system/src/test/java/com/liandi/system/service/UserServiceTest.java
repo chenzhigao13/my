@@ -1,4 +1,4 @@
-package com.liandi.system.service.impl;
+package com.liandi.system.service;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,14 +7,13 @@ import com.liandi.MySystemApplicationTests;
 import com.liandi.system.controller.request.QueryUserRequest;
 import com.liandi.system.controller.request.SaveUserRequest;
 import com.liandi.system.controller.request.UpdateUserRequest;
-import com.liandi.system.service.UserService;
 import com.liandi.system.service.dto.PageDTO;
 import com.liandi.system.service.dto.UserDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class UserServiceImplTest extends MySystemApplicationTests {
+public class UserServiceTest extends MySystemApplicationTests {
 
     @Autowired
     private UserService userService;

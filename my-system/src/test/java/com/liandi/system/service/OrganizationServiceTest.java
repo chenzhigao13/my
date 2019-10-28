@@ -1,4 +1,4 @@
-package com.liandi.system.service.impl;
+package com.liandi.system.service;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,23 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.google.gson.Gson;
 import com.liandi.MySystemApplicationTests;
 import com.liandi.system.controller.request.SaveOrganizationRequest;
-import com.liandi.system.service.OrganizationService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class OrganizationServiceImplTest extends MySystemApplicationTests {
+public class OrganizationServiceTest extends MySystemApplicationTests {
 
     @Autowired
     private OrganizationService organizationService;
 
     @Test
-    public void queryOrganizationTree() {
+    public void testQueryOrganizationTree() {
         log.info("organizationTree：{}", new Gson().toJson(organizationService.queryOrganizationTree()));
     }
 
     @Test
-    public void saveOrganization() {
+    public void testSaveOrganization() {
 
         SaveOrganizationRequest organization = new SaveOrganizationRequest();
         organization.setParentOrganizationId(2L);
@@ -32,8 +31,8 @@ public class OrganizationServiceImplTest extends MySystemApplicationTests {
     }
 
     @Test
-    public void updateOrganization() {}
+    public void testUpdateOrganization() {}
 
     @Test
-    public void deleteOrganization() {}
+    public void testDeleteOrganization() {}
 }

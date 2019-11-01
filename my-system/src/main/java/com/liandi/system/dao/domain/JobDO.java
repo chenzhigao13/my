@@ -1,5 +1,7 @@
 package com.liandi.system.dao.domain;
 
+import java.util.Date;
+
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -40,5 +42,8 @@ public class JobDO {
 
     @TableField("bean_name")
     private String beanName;
+
+    @TableField("create_time")
+    private Date createTime;
 
 }

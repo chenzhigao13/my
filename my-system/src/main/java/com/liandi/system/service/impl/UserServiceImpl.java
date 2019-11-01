@@ -59,8 +59,8 @@ public class UserServiceImpl implements UserService {
             .setPhone(queryUserRequest.getPhone()).setUserCode(queryUserRequest.getUserCode())
             .setUserName(queryUserRequest.getUserName());
 
-        int count = userMapper.countUser(listPageUserParam);
-        if (count < 1) {
+        Integer count = userMapper.countUser(listPageUserParam);
+        if (Objects.isNull(count) || count < 1) {
             return new PageDTO<>(0, Collections.emptyList());
         }
 

@@ -1,22 +1,15 @@
-package com.liandi.system.job;
-
-import java.io.Serializable;
+package com.liandi.system.service.dto;
 
 import lombok.Data;
 
 /**
- * job的pojo类
+ * 任务DTO类
  * 
  * @author czg
- * @date 2019/10/28 14:31
+ * @date 2019/10/29 16:40
  */
 @Data
-public class JobEntity implements Serializable {
-
-    /**
-     * 任务调度参数key
-     */
-    public static final String JOB_PARAM_KEY = "JOB_PARAM_KEY";
+public class JobDTO {
 
     private Long id;
 
@@ -25,6 +18,8 @@ public class JobEntity implements Serializable {
     private String groupName;
 
     private String cron;
+
+    private String description;
 
     /**
      * 任务状态。01：正常，02：暂停

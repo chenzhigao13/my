@@ -1,6 +1,8 @@
-package com.liandi.system.job;
+package com.liandi.system.job.impl;
 
 import org.springframework.stereotype.Component;
+
+import com.liandi.system.job.ITask;
 
 import lombok.extern.slf4j.Slf4j;
 

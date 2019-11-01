@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.liandi.system.exception.SystemException;
+import com.liandi.system.response.ResponseDTO;
 import com.liandi.system.response.ResponseEnum;
-import com.liandi.system.response.dto.ResponseDTO;
 
 import lombok.extern.slf4j.Slf4j;
 

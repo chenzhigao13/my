@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 
 import com.google.gson.Gson;
+import com.liandi.system.response.ResponseDTO;
 import com.liandi.system.response.ResponseEnum;
-import com.liandi.system.response.dto.ResponseDTO;
 
 /**
  * 认证过滤器

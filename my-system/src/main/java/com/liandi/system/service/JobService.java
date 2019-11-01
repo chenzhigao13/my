@@ -1,6 +1,13 @@
 package com.liandi.system.service;
 
+import java.util.List;
+
+import org.apache.commons.lang3.tuple.Pair;
+
+import com.liandi.system.controller.request.QueryJobRequest;
 import com.liandi.system.controller.request.SaveJobRequest;
+import com.liandi.system.controller.request.UpdateJobRequest;
+import com.liandi.system.service.dto.JobDTO;
 
 /**
  * job的Service接口
@@ -11,10 +18,53 @@ import com.liandi.system.controller.request.SaveJobRequest;
 public interface JobService {
 
     /**
+     * 分页查询任务
+     * 
+     * @param queryJobRequest
+     * @return
+     */
+    Pair<Integer, List<JobDTO>> queryJob(QueryJobRequest queryJobRequest);
+
+    /**
      * 保存任务
      * 
      * @param saveJobRequest
      */
     void saveJob(SaveJobRequest saveJobRequest);
+
+    /**
+     * 跟新任务
+     * 
+     * @param updateJobRequest
+     */
+    void updateJob(UpdateJobRequest updateJobRequest);
+
+    /**
+     * 删除任务
+     * 
+     * @param jobId
+     */
+    void deleteJob(Long jobId);
+
+    /**
+     * 暂停任务
+     * 
+     * @param jobId
+     */
+    void pauseJob(Long jobId);
+
+    /**
+     * 立即运行任务
+     * 
+     * @param jobId
+     */
+    void runJob(Long jobId);
+
+    /**
+     * 恢复任务
+     * 
+     * @param jobId
+     */
+    void resumeJob(Long jobId);
 
 }

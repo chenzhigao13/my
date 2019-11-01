@@ -45,8 +45,8 @@ public class OrganizationServiceImpl implements OrganizationService {
         ListPageOrganizationParam listPageOrganizationParam = new ListPageOrganizationParam();
         listPageOrganizationParam.setOrganizationName(queryOrganizationRequest.getOrganizationName())
             .setParentOrganizationId(queryOrganizationRequest.getParentOrganizationId());
-        int count = organizationMapper.countOrganization(listPageOrganizationParam);
-        if (count < 1) {
+        Integer count = organizationMapper.countOrganization(listPageOrganizationParam);
+        if (Objects.isNull(count) || count < 1) {
             return new PageDTO<>(0, Collections.emptyList());
         }
 

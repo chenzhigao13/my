@@ -1,12 +1,10 @@
-package com.liandi.system.util;
+package com.liandi.system.job;
 
 import org.apache.commons.lang3.StringUtils;
 import org.quartz.*;
 
 import com.liandi.system.constant.JobStatusEnum;
 import com.liandi.system.exception.SystemException;
-import com.liandi.system.job.JobEntity;
-import com.liandi.system.job.ScheduleJob;
 import com.liandi.system.response.ResponseEnum;
 
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
  * @date 2019/10/28 14:35
  */
 @Slf4j
-public class ScheduleUtil {
+public class ScheduleJobUtil {
 
     private final static String JOB_NAME = "TASK_";
 

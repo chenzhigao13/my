@@ -1,13 +1,12 @@
-package com.liandi.system.response.dto;
-
-import com.liandi.system.response.ResponseEnum;
+package com.liandi.system.response;
 
 import lombok.Data;
 
 /**
+ * 响应DTO
+ * 
  * @author czg
  * @date 2019/7/16 8:20
- * @description 响应DTO
  */
 @Data
 public class ResponseDTO<T> {

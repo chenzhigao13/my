@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
+import com.liandi.system.response.ResponseDTO;
 import com.liandi.system.response.ResponseEnum;
-import com.liandi.system.response.dto.ResponseDTO;
 
 /**
  * @author czg

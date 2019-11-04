@@ -4,9 +4,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
+ * 分页查询组织请求参数
+ * 
  * @author czg
  * @date 2019/8/13 20:12
- * @description 分页查询组织请求参数
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

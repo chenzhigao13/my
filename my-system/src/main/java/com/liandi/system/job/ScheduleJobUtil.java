@@ -3,7 +3,6 @@ package com.liandi.system.job;
 import org.apache.commons.lang3.StringUtils;
 import org.quartz.*;
 
-import com.liandi.system.constant.JobStatusEnum;
 import com.liandi.system.exception.SystemException;
 import com.liandi.system.response.ResponseEnum;
 
@@ -66,7 +65,7 @@ public class ScheduleJobUtil {
             scheduler.scheduleJob(jobDetail, trigger);
 
             // 暂停任务
-            if (StringUtils.equals(JobStatusEnum.PAUSE.getStatus(), jobEntity.getStatus())) {
+            if (StringUtils.equals(JobEntity.PAUSE, jobEntity.getStatus())) {
                 pauseJob(scheduler, jobEntity.getId());
             }
         } catch (SchedulerException e) {
@@ -94,7 +93,7 @@ public class ScheduleJobUtil {
             scheduler.rescheduleJob(triggerKey, trigger);
 
             // 暂停任务
-            if (StringUtils.equals(JobStatusEnum.PAUSE.getStatus(), jobEntity.getStatus())) {
+            if (StringUtils.equals(JobEntity.PAUSE, jobEntity.getStatus())) {
                 pauseJob(scheduler, jobEntity.getId());
             }
 

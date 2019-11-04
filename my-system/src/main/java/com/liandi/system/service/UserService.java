@@ -1,7 +1,7 @@
 package com.liandi.system.service;
 
 import com.liandi.system.controller.request.*;
-import com.liandi.system.service.dto.PageDTO;
+import com.liandi.system.response.PageDTO;
 import com.liandi.system.service.dto.UserDTO;
 
 /**

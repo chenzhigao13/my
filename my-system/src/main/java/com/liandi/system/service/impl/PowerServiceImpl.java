@@ -2,6 +2,7 @@ package com.liandi.system.service.impl;
 
 import java.util.*;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,9 +22,10 @@ import com.liandi.system.service.PowerService;
 import com.liandi.system.service.dto.PowerDTO;
 
 /**
+ * 权限Service接口实现
+ * 
  * @author czg
  * @date 2019/7/27 14:38
- * @description 权限Service接口实现
  */
 @Service
 public class PowerServiceImpl implements PowerService {
@@ -48,7 +50,8 @@ public class PowerServiceImpl implements PowerService {
         powerDO.setParentPowerId(savePowerRequest.getParentPowerId()).setPowerName(savePowerRequest.getPowerName())
             .setPowerType(savePowerRequest.getPowerType())
             .setPowerUrl(Optional.of(savePowerRequest.getPowerUrl()).orElse(StringUtils.EMPTY))
-            .setSort(Optional.ofNullable(savePowerRequest.getSort()).orElse(DEFAULT_SORT));
+            .setSort(Optional.ofNullable(savePowerRequest.getSort()).orElse(DEFAULT_SORT))
+            .setIcon(Optional.ofNullable(savePowerRequest.getIcon()).orElse(StringUtils.EMPTY));
         powerMapper.insert(powerDO);
 
     }
@@ -65,7 +68,8 @@ public class PowerServiceImpl implements PowerService {
         updatePowerParam.setId(updatePowerRequest.getId()).setParentPowerId(updatePowerRequest.getParentPowerId())
             .setPowerName(updatePowerRequest.getPowerName()).setPowerType(updatePowerRequest.getPowerType())
             .setPowerUrl(Optional.of(updatePowerRequest.getPowerUrl()).orElse(StringUtils.EMPTY))
-            .setSort(Optional.ofNullable(updatePowerRequest.getSort()).orElse(DEFAULT_SORT));
+            .setSort(Optional.ofNullable(updatePowerRequest.getSort()).orElse(DEFAULT_SORT))
+            .setIcon(Optional.ofNullable(updatePowerRequest.getIcon()).orElse(StringUtils.EMPTY));
         powerMapper.updateById(updatePowerParam);
 
     }
@@ -99,17 +103,18 @@ public class PowerServiceImpl implements PowerService {
             return rootPowerList;
         }
 
-        rootPowerList.forEach(parentPower -> setPowerTree(parentPower, powerList));
+        rootPowerList.forEach(parentPower -> setChildPower(parentPower, powerList));
 
         return rootPowerList;
     }
 
-    private void setPowerTree(PowerDTO parentPower, List<PowerDO> powerList) {
+    private void setChildPower(PowerDTO parentPower, List<PowerDO> powerList) {
 
         if (powerList.isEmpty()) {
             return;
         }
 
+        List<PowerDTO> parentPowerList = Lists.newArrayList();
         PowerDTO powerDTO;
         Iterator<PowerDO> powerIterator = powerList.iterator();
         while (powerIterator.hasNext()) {
@@ -122,25 +127,29 @@ public class PowerServiceImpl implements PowerService {
 
             List<PowerDTO> childPowerList = parentPower.getChildPowerList();
             if (Objects.isNull(childPowerList)) {
-                childPowerList = Lists.newArrayListWithCapacity(powerList.size());
+                childPowerList = Lists.newArrayList();
                 parentPower.setChildPowerList(childPowerList);
             }
             powerDTO = new PowerDTO();
             powerDTO.setId(power.getId()).setPowerName(power.getPowerName()).setPowerType(power.getPowerType())
-                .setPowerUrl(power.getPowerUrl()).setSort(power.getSort());
+                .setPowerUrl(power.getPowerUrl()).setSort(power.getSort()).setIcon(power.getIcon());
             childPowerList.add(powerDTO);
+
+            parentPowerList.add(powerDTO);
 
             powerIterator.remove();
 
-            setPowerTree(powerDTO, powerList);
+        }
 
+        if (CollectionUtils.isNotEmpty(parentPowerList) && CollectionUtils.isNotEmpty(powerList)) {
+            parentPowerList.forEach(parent -> setChildPower(parent, powerList));
         }
 
     }
 
     private List<PowerDTO> getRootPower(List<PowerDO> powerList) {
 
-        List<PowerDTO> rootPowerList = Lists.newArrayListWithCapacity(powerList.size());
+        List<PowerDTO> rootPowerList = Lists.newArrayList();
 
         PowerDTO powerDTO;
         Iterator<PowerDO> powerIterator = powerList.iterator();
@@ -154,7 +163,7 @@ public class PowerServiceImpl implements PowerService {
 
             powerDTO = new PowerDTO();
             powerDTO.setId(power.getId()).setPowerName(power.getPowerName()).setPowerType(power.getPowerType())
-                .setPowerUrl(power.getPowerUrl()).setSort(power.getSort());
+                .setPowerUrl(power.getPowerUrl()).setSort(power.getSort()).setIcon(power.getIcon());
             rootPowerList.add(powerDTO);
 
             powerIterator.remove();

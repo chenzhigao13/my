@@ -3,6 +3,9 @@ package com.liandi.system.controller.request;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.liandi.common.validation.DesignatedValue;
+import com.liandi.system.job.JobEntity;
+
 import lombok.Data;
 
 /**
@@ -33,7 +36,7 @@ public class SaveJobRequest {
      * 任务状态。01：正常，02：暂停
      */
     @NotBlank(message = "任务状态不能为空")
-    // @DesignatedValue(value = {JobStatusEnum.NORMAL})
+    @DesignatedValue(value = {JobEntity.NORMAL, JobEntity.PAUSE})
     private String status;
 
     @NotBlank(message = "bean名称不能为空")

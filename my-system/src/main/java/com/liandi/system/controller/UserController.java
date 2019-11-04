@@ -8,14 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.liandi.system.controller.request.*;
+import com.liandi.system.response.PageDTO;
 import com.liandi.system.service.UserService;
-import com.liandi.system.service.dto.PageDTO;
 import com.liandi.system.service.dto.UserDTO;
 
 /**
+ * 用户controller
+ * 
  * @author czg
  * @date 2019/7/13 17:09
- * @description 用户controller
  */
 @RestController
 @RequestMapping("sys/user")

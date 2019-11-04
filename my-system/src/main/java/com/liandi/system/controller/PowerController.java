@@ -14,9 +14,10 @@ import com.liandi.system.service.PowerService;
 import com.liandi.system.service.dto.PowerDTO;
 
 /**
+ * 权限controller
+ * 
  * @author czg
  * @date 2019/8/4 17:33
- * @description 权限controller
  */
 @RestController
 @RequestMapping("sys/power")
@@ -25,7 +26,7 @@ public class PowerController {
     @Autowired
     private PowerService powerService;
 
-    @GetMapping("/queryPowerTree")
+    @PostMapping("/queryPowerTree")
     public List<PowerDTO> queryPowerTree() {
         return powerService.queryPowerTree();
     }

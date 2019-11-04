@@ -9,32 +9,24 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import com.liandi.system.response.ResponseDTO;
 import com.liandi.system.response.ResponseEnum;
 
 /**
+ * 对 ResponseBody 封装
+ * 
  * @author czg
  * @date 2019/7/31 16:14
- * @description 对 ResponseBody 封装
  */
 @ControllerAdvice
 public class ResponseAdvice implements ResponseBodyAdvice<Object> {
 
-    private static final String NONE_RETURN = "void";
-
     @Override
-    public boolean supports(MethodParameter returnType,
+    public boolean supports(@NotNull MethodParameter returnType,
         @NotNull Class<? extends HttpMessageConverter<?>> converterType) {
-
-        if (NONE_RETURN.equals(returnType.getParameterType().getName())) {
-            return true;
-        }
-
-        return returnType.hasMethodAnnotation(ResponseBody.class);
-
+        return true;
     }
 
     @Override

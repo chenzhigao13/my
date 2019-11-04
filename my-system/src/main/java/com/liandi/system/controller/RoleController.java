@@ -12,9 +12,10 @@ import com.liandi.system.controller.request.UpdateRoleRequest;
 import com.liandi.system.service.RoleService;
 
 /**
+ * 角色controller
+ * 
  * @author czg
  * @date 2019/8/4 19:47
- * @description 角色controller
  */
 @RestController
 @RequestMapping("sys/role")

@@ -22,6 +22,8 @@ public class PowerDTO {
 
     private String powerType;
 
+    private String icon;
+
     private Long parentPowerId;
 
     private Integer sort;

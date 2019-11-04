@@ -27,6 +27,9 @@ public class PowerDO {
     @TableField("power_type")
     private String powerType;
 
+    @TableField("icon")
+    private String icon;
+
     @TableField(value = "parent_power_id", updateStrategy = FieldStrategy.IGNORED)
     private Long parentPowerId;
 

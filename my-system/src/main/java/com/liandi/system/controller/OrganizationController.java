@@ -11,14 +11,15 @@ import org.springframework.web.bind.annotation.*;
 import com.liandi.system.controller.request.QueryOrganizationRequest;
 import com.liandi.system.controller.request.SaveOrganizationRequest;
 import com.liandi.system.controller.request.UpdateOrganizationRequest;
+import com.liandi.system.response.PageDTO;
 import com.liandi.system.service.OrganizationService;
 import com.liandi.system.service.dto.OrganizationDTO;
-import com.liandi.system.service.dto.PageDTO;
 
 /**
+ * 组织controller
+ * 
  * @author czg
  * @date 2019/8/4 20:20
- * @description 组织controller
  */
 @RestController
 @RequestMapping("sys/organization")

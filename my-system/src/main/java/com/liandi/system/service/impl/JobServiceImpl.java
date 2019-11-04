@@ -6,14 +6,12 @@ import java.util.List;
 import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
 import org.quartz.Scheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
-import com.liandi.system.constant.JobStatusEnum;
 import com.liandi.system.controller.request.QueryJobRequest;
 import com.liandi.system.controller.request.SaveJobRequest;
 import com.liandi.system.controller.request.UpdateJobRequest;
@@ -23,6 +21,7 @@ import com.liandi.system.dao.param.ListPageJobParam;
 import com.liandi.system.exception.SystemException;
 import com.liandi.system.job.JobEntity;
 import com.liandi.system.job.ScheduleJobUtil;
+import com.liandi.system.response.PageDTO;
 import com.liandi.system.response.ResponseEnum;
 import com.liandi.system.service.JobService;
 import com.liandi.system.service.dto.JobDTO;
@@ -44,7 +43,7 @@ public class JobServiceImpl implements JobService {
     private JobMapper jobMapper;
 
     @Override
-    public Pair<Integer, List<JobDTO>> queryJob(QueryJobRequest queryJobRequest) {
+    public PageDTO<JobDTO> queryJob(QueryJobRequest queryJobRequest) {
         ListPageJobParam listPageJobParam = new ListPageJobParam();
         listPageJobParam.setBeanName(queryJobRequest.getBeanName());
         listPageJobParam.setGroupName(queryJobRequest.getGroupName());
@@ -53,12 +52,12 @@ public class JobServiceImpl implements JobService {
 
         Integer count = jobMapper.countJob(listPageJobParam);
         if (Objects.isNull(count) || count < 1) {
-            return Pair.of(0, Collections.emptyList());
+            return PageDTO.of(0, Collections.emptyList());
         }
 
         PageUtil.setSize(listPageJobParam, queryJobRequest);
 
-        return Pair.of(count, JobDo2JobDTO(jobMapper.listPageJob(listPageJobParam)));
+        return PageDTO.of(count, JobDo2JobDTO(jobMapper.listPageJob(listPageJobParam)));
     }
 
     private List<JobDTO> JobDo2JobDTO(List<JobDO> jobList) {
@@ -136,13 +135,13 @@ public class JobServiceImpl implements JobService {
     public void pauseJob(Long jobId) {
         JobDO job = getJobDO(jobId);
 
-        if (StringUtils.equals(JobStatusEnum.PAUSE.getStatus(), job.getStatus())) {
+        if (StringUtils.equals(JobEntity.PAUSE, job.getStatus())) {
             throw new SystemException("该任务已暂停，无须重复操作", ResponseEnum.BUSINESS_ERROR_CODE);
         }
 
         JobDO updateJobParam = new JobDO();
         updateJobParam.setId(jobId);
-        updateJobParam.setStatus(JobStatusEnum.PAUSE.getStatus());
+        updateJobParam.setStatus(JobEntity.PAUSE);
         jobMapper.updateById(updateJobParam);
 
         ScheduleJobUtil.pauseJob(scheduler, jobId);
@@ -160,9 +159,14 @@ public class JobServiceImpl implements JobService {
     public void resumeJob(Long jobId) {
         JobDO job = getJobDO(jobId);
 
-        if (StringUtils.equals(JobStatusEnum.PAUSE.getStatus(), job.getStatus())) {
+        if (StringUtils.equals(JobEntity.PAUSE, job.getStatus())) {
             throw new SystemException("该任务已正常，无须重复操作", ResponseEnum.BUSINESS_ERROR_CODE);
         }
+
+        JobDO updateJobParam = new JobDO();
+        updateJobParam.setId(jobId);
+        updateJobParam.setStatus(JobEntity.NORMAL);
+        jobMapper.updateById(updateJobParam);
 
         ScheduleJobUtil.resumeJob(scheduler, jobId);
     }

@@ -7,7 +7,7 @@ import com.liandi.MySystemApplicationTests;
 import com.liandi.system.controller.request.QueryUserRequest;
 import com.liandi.system.controller.request.SaveUserRequest;
 import com.liandi.system.controller.request.UpdateUserRequest;
-import com.liandi.system.service.dto.PageDTO;
+import com.liandi.system.response.PageDTO;
 import com.liandi.system.service.dto.UserDTO;
 
 import lombok.extern.slf4j.Slf4j;

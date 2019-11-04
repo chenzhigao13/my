@@ -17,10 +17,10 @@ import com.liandi.system.dao.domain.OrganizationDO;
 import com.liandi.system.dao.domain.UserDO;
 import com.liandi.system.dao.param.ListPageOrganizationParam;
 import com.liandi.system.exception.SystemException;
+import com.liandi.system.response.PageDTO;
 import com.liandi.system.response.ResponseEnum;
 import com.liandi.system.service.OrganizationService;
 import com.liandi.system.service.dto.OrganizationDTO;
-import com.liandi.system.service.dto.PageDTO;
 import com.liandi.system.util.PageUtil;
 
 /**
@@ -47,7 +47,7 @@ public class OrganizationServiceImpl implements OrganizationService {
             .setParentOrganizationId(queryOrganizationRequest.getParentOrganizationId());
         Integer count = organizationMapper.countOrganization(listPageOrganizationParam);
         if (Objects.isNull(count) || count < 1) {
-            return new PageDTO<>(0, Collections.emptyList());
+            return PageDTO.of(0, Collections.emptyList());
         }
 
         PageUtil.setSize(listPageOrganizationParam, queryOrganizationRequest);
@@ -65,7 +65,7 @@ public class OrganizationServiceImpl implements OrganizationService {
             organizationDtoList.add(organizationDTO);
         }
 
-        return new PageDTO<>(count, organizationDtoList);
+        return PageDTO.of(count, organizationDtoList);
     }
 
     @Override

@@ -98,6 +98,10 @@ public class ShiroConfig {
          * role：对应角色权限可访问
          */
         Map<String, String> filterMap = new LinkedHashMap<>();
+
+        // TODO 所有都匿名访问
+        filterMap.put("/**", "anon");
+
         // /sys/user/login 登陆接口可以匿名访问
         filterMap.put("/sys/user/login", "anon");
         // /admin/** 接口登陆的用户须有admin角色
@@ -105,8 +109,8 @@ public class ShiroConfig {
         // /docs/** 接口登陆的用户须有document:read权限
         filterMap.put("/docs/**", "authc, perms[document:read]");
         // 剩余的所有接口须用户登陆
-        filterMap.put("/**", "kickout,authc");
-        // /sys/user/logout 登出接口
+        // filterMap.put("/**", "kickout,authc");
+        // /sys/user/logout 登出接口CustomRealm
         filterMap.put("/sys/user/logout", "logout");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);

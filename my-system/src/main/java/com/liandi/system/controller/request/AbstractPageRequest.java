@@ -6,9 +6,10 @@ import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 /**
+ * 分页请求参数基类
+ * 
  * @author czg
  * @date 2019/7/31 15:29
- * @description 分页请求参数基类
  */
 @Data
 public abstract class AbstractPageRequest {

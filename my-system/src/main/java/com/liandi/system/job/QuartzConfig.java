@@ -1,4 +1,4 @@
-package com.liandi.system.config;
+package com.liandi.system.job;
 
 import java.util.Properties;
 

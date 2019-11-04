@@ -1,17 +1,15 @@
 package com.liandi.system.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.liandi.system.controller.request.QueryJobRequest;
 import com.liandi.system.controller.request.SaveJobRequest;
 import com.liandi.system.controller.request.UpdateJobRequest;
+import com.liandi.system.response.PageDTO;
 import com.liandi.system.service.JobService;
 import com.liandi.system.service.dto.JobDTO;
 
@@ -29,7 +27,7 @@ public class JobController {
     private JobService jobService;
 
     @PostMapping("/queryJob")
-    public Pair<Integer, List<JobDTO>> queryJob(@Valid @RequestBody QueryJobRequest queryJobRequest) {
+    public PageDTO<JobDTO> queryJob(@Valid @RequestBody QueryJobRequest queryJobRequest) {
         return jobService.queryJob(queryJobRequest);
     }
 

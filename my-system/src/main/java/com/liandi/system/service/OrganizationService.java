@@ -5,8 +5,8 @@ import java.util.List;
 import com.liandi.system.controller.request.QueryOrganizationRequest;
 import com.liandi.system.controller.request.SaveOrganizationRequest;
 import com.liandi.system.controller.request.UpdateOrganizationRequest;
+import com.liandi.system.response.PageDTO;
 import com.liandi.system.service.dto.OrganizationDTO;
-import com.liandi.system.service.dto.PageDTO;
 
 /**
  * @author czg

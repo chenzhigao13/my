@@ -25,9 +25,9 @@ import com.liandi.system.dao.domain.UserRoleDO;
 import com.liandi.system.dao.domain.UsergroupUserDO;
 import com.liandi.system.dao.param.ListPageUserParam;
 import com.liandi.system.exception.SystemException;
+import com.liandi.system.response.PageDTO;
 import com.liandi.system.response.ResponseEnum;
 import com.liandi.system.service.UserService;
-import com.liandi.system.service.dto.PageDTO;
 import com.liandi.system.service.dto.UserDTO;
 import com.liandi.system.util.PageUtil;
 
@@ -61,13 +61,13 @@ public class UserServiceImpl implements UserService {
 
         Integer count = userMapper.countUser(listPageUserParam);
         if (Objects.isNull(count) || count < 1) {
-            return new PageDTO<>(0, Collections.emptyList());
+            return PageDTO.of(0, Collections.emptyList());
         }
 
         PageUtil.setSize(listPageUserParam, queryUserRequest);
         List<UserDO> userList = userMapper.listPageUser(listPageUserParam);
 
-        return new PageDTO<>(count, userDo2UserDTO(userList));
+        return PageDTO.of(count, userDo2UserDTO(userList));
     }
 
     @Override

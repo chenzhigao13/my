@@ -1,12 +1,9 @@
 package com.liandi.system.service;
 
-import java.util.List;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.liandi.system.controller.request.QueryJobRequest;
 import com.liandi.system.controller.request.SaveJobRequest;
 import com.liandi.system.controller.request.UpdateJobRequest;
+import com.liandi.system.response.PageDTO;
 import com.liandi.system.service.dto.JobDTO;
 
 /**
@@ -23,7 +20,7 @@ public interface JobService {
      * @param queryJobRequest
      * @return
      */
-    Pair<Integer, List<JobDTO>> queryJob(QueryJobRequest queryJobRequest);
+    PageDTO<JobDTO> queryJob(QueryJobRequest queryJobRequest);
 
     /**
      * 保存任务

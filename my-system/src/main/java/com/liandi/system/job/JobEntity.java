@@ -18,6 +18,16 @@ public class JobEntity implements Serializable {
      */
     public static final String JOB_PARAM_KEY = "JOB_PARAM_KEY";
 
+    /**
+     * 任务状态。正常
+     */
+    public static final String NORMAL = "01";
+
+    /**
+     * 任务状态。暂停
+     */
+    public static final String PAUSE = "02";
+
     private Long id;
 
     private String jobName;

@@ -23,6 +23,9 @@ public class SavePowerRequest {
     @NotBlank(message = "权限类型不能为空")
     private String powerType;
 
+    @Size(max = 32, message = "图标最长32位")
+    private String icon;
+
     private Long parentPowerId;
 
     private Integer sort;

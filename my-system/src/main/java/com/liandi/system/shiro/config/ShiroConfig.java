@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.CacheManager;
-import org.apache.shiro.cache.MemoryConstrainedCacheManager;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.session.mgt.SessionManager;
@@ -18,6 +17,7 @@ import org.springframework.context.annotation.Configuration;
 import com.liandi.system.shiro.filter.CustomAuthenticationFilter;
 import com.liandi.system.shiro.filter.KickoutSessionFilter;
 import com.liandi.system.shiro.manager.CustomSessionManager;
+import com.liandi.system.shiro.manager.RedisCacheManager;
 import com.liandi.system.shiro.realm.CustomRealm;
 
 /**
@@ -36,7 +36,7 @@ public class ShiroConfig {
 
     @Bean
     public CacheManager cacheManager() {
-        return new MemoryConstrainedCacheManager();
+        return new RedisCacheManager();
     }
 
     @Bean
@@ -100,7 +100,7 @@ public class ShiroConfig {
         Map<String, String> filterMap = new LinkedHashMap<>();
 
         // TODO 所有都匿名访问
-        filterMap.put("/**", "anon");
+        // filterMap.put("/**", "anon");
 
         // /sys/user/login 登陆接口可以匿名访问
         filterMap.put("/sys/user/login", "anon");
@@ -109,7 +109,7 @@ public class ShiroConfig {
         // /docs/** 接口登陆的用户须有document:read权限
         filterMap.put("/docs/**", "authc, perms[document:read]");
         // 剩余的所有接口须用户登陆
-        // filterMap.put("/**", "kickout,authc");
+        filterMap.put("/**", "authc,kickout");
         // /sys/user/logout 登出接口CustomRealm
         filterMap.put("/sys/user/logout", "logout");
 

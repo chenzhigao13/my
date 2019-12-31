@@ -47,6 +47,12 @@
             <artifactId>gson</artifactId>
         </dependency>
 
+        <!-- 糊涂，java工具类 -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

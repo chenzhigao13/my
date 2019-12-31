@@ -38,6 +38,10 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
             return new ResponseDTO<>(ResponseEnum.OK);
         }
 
+        if (body instanceof ResponseDTO) {
+            return body;
+        }
+
         return new ResponseDTO<>(ResponseEnum.OK, body);
 
     }

@@ -14,6 +14,7 @@ import com.deepoove.poi.data.style.Style;
 import com.deepoove.poi.data.style.TableStyle;
 import com.google.common.collect.Maps;
 import com.google.common.io.Files;
+import com.liandi.common.poitl.data.TableData;
 import com.liandi.common.poitl.data.TableDetailData;
 import com.liandi.common.poitl.util.PoiTlUtil;
 
@@ -84,6 +85,7 @@ public class PoiTlUtilTest {
         Map<String, String> m = Maps.newHashMap();
         m.put("k01", "测试map");
         model.setM(m);
+        model.setTable(new TableData());
 
         Files.write(Objects.requireNonNull(PoiTlUtil.generateWord(template, model)), new File("D://poi-tl.docx"));
 
@@ -95,6 +97,7 @@ public class PoiTlUtilTest {
         private Boolean sex;
         private Date nowDate;
         private TableDetailData detailTable;
+        private TableData table;
         // 使用 el 表达式时，不能用Map
         private Map<String, String> m;
     }

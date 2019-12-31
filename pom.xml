@@ -35,6 +35,8 @@
         <shiro.version>1.4.1</shiro.version>
         <my.version>0.0.1-SNAPSHOT</my.version>
         <quartz.version>2.3.0</quartz.version>
+        <redisson.version>3.11.6</redisson.version>
+        <hutool.version>5.0.7</hutool.version>
     </properties>
 
     <dependencyManagement>
@@ -126,6 +128,20 @@
                 <groupId>org.quartz-scheduler</groupId>
                 <artifactId>quartz-jobs</artifactId>
                 <version>${quartz.version}</version>
+            </dependency>
+
+            <!-- redisson分布式redis框架 -->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+
+            <!-- 糊涂 -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
             </dependency>
 
         </dependencies>

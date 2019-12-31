@@ -10,6 +10,7 @@ import com.deepoove.poi.config.Configure;
 import com.deepoove.poi.config.ELMode;
 import com.liandi.common.poitl.policy.DetailTablePolicy;
 import com.liandi.common.poitl.policy.PictureListRenderPolicy;
+import com.liandi.common.poitl.policy.TablePolicy;
 import com.liandi.common.util.CloseableUtil;
 
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +36,11 @@ public class PoiTlUtil {
     private static final String TAG_NAME = "detailTable";
 
     /**
+     * 自定义表格标签名
+     */
+    private static final String TABLE_TAG_NAME = "table";
+
+    /**
      * 图片集合插件语法：{{%}}
      */
     private static final char PICTURE_LIST_PLUGIN_CHAR = '%';
@@ -57,7 +63,8 @@ public class PoiTlUtil {
 
             // 新增渲染策列
             Configure config = Configure.newBuilder().customPolicy(TAG_NAME, new DetailTablePolicy())
-                .setElMode(ELMode.SPEL_MODE).addPlugin(PICTURE_LIST_PLUGIN_CHAR, new PictureListRenderPolicy()).build();
+                .customPolicy(TABLE_TAG_NAME, new TablePolicy()).setElMode(ELMode.SPEL_MODE)
+                .addPlugin(PICTURE_LIST_PLUGIN_CHAR, new PictureListRenderPolicy()).build();
 
             tl = XWPFTemplate.compile(is, config).render(model);
 

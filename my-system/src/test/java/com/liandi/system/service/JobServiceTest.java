@@ -1,5 +1,10 @@
 package com.liandi.system.service;
 
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -27,6 +32,9 @@ public class JobServiceTest extends MySystemApplicationTests {
 
     @Test
     public void testSaveJob() {
+        List<String> l = Lists.newArrayList("1", "2");
+        Map<String, String> collect = l.stream().collect(Collectors.toMap(a -> a, a -> a));
+        System.out.println(collect);
 
     }
 

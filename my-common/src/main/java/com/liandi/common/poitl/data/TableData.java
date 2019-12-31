@@ -14,12 +14,12 @@ import lombok.Data;
  *
  */
 @Data
-public class TableDetailData {
+public class TableData {
 
     /**
      * 填充数据所在行数
      */
-    private Integer startRow;
+    private Integer startColumn;
 
     /**
      * 列数

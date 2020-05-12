@@ -3,6 +3,7 @@ package com.liandi.system.advice;
 import java.util.List;
 
 import org.apache.shiro.ShiroException;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.ObjectError;
@@ -32,6 +33,9 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ShiroException.class)
     public ResponseDTO handleShiroException(ShiroException e) {
+        if (e instanceof UnknownAccountException) {
+            return new ResponseDTO(ResponseEnum.ACCOUNT_OR_PASSWORD_ERROR);
+        }
         log.error("鉴权或授权过程出错：", e);
         return new ResponseDTO(ResponseEnum.SHIRO_ERROR);
     }

@@ -14,6 +14,8 @@ import com.liandi.system.redisson.RedissonManager;
 import cn.hutool.core.util.ObjectUtil;
 
 /**
+ * redis缓存
+ * 
  * @author czg
  * @date 2019/12/16 15:40
  */

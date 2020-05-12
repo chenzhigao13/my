@@ -1,5 +1,7 @@
 package com.liandi.system.redisson;
 
+import java.util.Optional;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -37,7 +39,7 @@ public class RedissonTest extends MySystemApplicationTests {
 
     @Test
     public void testGetMapValue() {
-        log.info("mapValue: {}", redissonManager.getMapValue("map", "a"));
+        log.info("mapValue: {}", Optional.ofNullable(redissonManager.getMapValue("map", "a")));
     }
 
 }

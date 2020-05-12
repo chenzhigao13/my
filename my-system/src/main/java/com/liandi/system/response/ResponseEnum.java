@@ -48,6 +48,10 @@ public enum ResponseEnum {
      */
     DELETE_SCHEDULE_JOB_ERROR("删除定时任务异常", 2007),
     /**
+     * 账号或密码不正确
+     */
+    ACCOUNT_OR_PASSWORD_ERROR("账号或密码不正确", 2996),
+    /**
      * 未登录
      */
     SHIRO_NOT_LOGIN_ERROR("未登录", 2997),

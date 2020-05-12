@@ -1,6 +1,5 @@
 package com.liandi.system.shiro.config;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
@@ -8,6 +7,7 @@ import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.session.mgt.SessionManager;
+import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.liandi.system.shiro.filter.CustomAuthenticationFilter;
 import com.liandi.system.shiro.filter.KickoutSessionFilter;
+import com.liandi.system.shiro.manager.CustomSessionDao;
 import com.liandi.system.shiro.manager.CustomSessionManager;
 import com.liandi.system.shiro.manager.RedisCacheManager;
 import com.liandi.system.shiro.realm.CustomRealm;
@@ -30,13 +31,22 @@ import com.liandi.system.shiro.realm.CustomRealm;
 public class ShiroConfig {
 
     @Bean
+    public SessionDAO sessionDAO() {
+        CustomSessionDao customSessionDao = new CustomSessionDao();
+        return customSessionDao;
+    }
+
+    @Bean
     public SessionManager sessionManager() {
-        return new CustomSessionManager();
+        CustomSessionManager customSessionManager = new CustomSessionManager();
+        customSessionManager.setSessionDAO(sessionDAO());
+        return customSessionManager;
     }
 
     @Bean
     public CacheManager cacheManager() {
-        return new RedisCacheManager();
+        RedisCacheManager redisCacheManager = new RedisCacheManager();
+        return redisCacheManager;
     }
 
     @Bean
@@ -97,7 +107,7 @@ public class ShiroConfig {
          * perms：对应权限可访问
          * role：对应角色权限可访问
          */
-        Map<String, String> filterMap = new LinkedHashMap<>();
+        Map<String, String> filterMap = shiroFilterFactoryBean.getFilterChainDefinitionMap();
 
         // TODO 所有都匿名访问
         // filterMap.put("/**", "anon");
@@ -112,8 +122,6 @@ public class ShiroConfig {
         filterMap.put("/**", "authc,kickout");
         // /sys/user/logout 登出接口CustomRealm
         filterMap.put("/sys/user/logout", "logout");
-
-        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
 
         return shiroFilterFactoryBean;
     }

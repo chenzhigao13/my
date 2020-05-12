@@ -1,6 +1,5 @@
 package com.liandi.system.shiro.realm;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -31,7 +30,7 @@ public class CustomRealm extends AuthorizingRealm {
     private String salt;
 
     /**
-     * 获取用户的角色和权限的逻辑，给shiro做权限判断
+     * 授权(验证权限时调用)
      * 
      * @param principals
      * @return
@@ -65,7 +64,7 @@ public class CustomRealm extends AuthorizingRealm {
     }
 
     /**
-     * 获取用户信息的业务逻辑，shiro登录认证
+     * shiro登录认证(登录时调用)
      * 
      * @param token
      * @return
@@ -79,16 +78,10 @@ public class CustomRealm extends AuthorizingRealm {
         }
 
         UsernamePasswordToken upToken = (UsernamePasswordToken)token;
-        String loginName = upToken.getUsername();
-
-        if (StringUtils.isBlank(loginName)) {
-            throw new AccountException("登陆名不能为空");
-        }
-
-        UserDTO user = userService.getUserByLoginName(loginName);
-
+        UserDTO user = userService.getUserByLoginName(upToken.getUsername());
         if (user == null) {
-            throw new UnknownAccountException("登陆名和密码不正确");
+            log.error("登录名或密码不正确。{}", upToken);
+            throw new UnknownAccountException("登录名或密码不正确");
         }
 
         return new SimpleAuthenticationInfo(user, user.getPswd(), ByteSource.Util.bytes(salt), getName());

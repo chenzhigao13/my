@@ -21,9 +21,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CustomSessionManager extends DefaultWebSessionManager {
 
-    private static final String SESSION_HEADER_KEY = "my-sessionId";
+    private final String sessionHeaderKey = "my-sessionId";
 
-    private static final String REFERENCED_SESSION_ID_SOURCE = "Stateless request";
+    private final String referencedSessionIdSource = "Stateless request";
 
     public CustomSessionManager() {
         super();
@@ -32,9 +32,9 @@ public class CustomSessionManager extends DefaultWebSessionManager {
     @Override
     protected Serializable getSessionId(ServletRequest request, ServletResponse response) {
         // 如果请求头中有 SESSION_HEADER_KEY 则其值为sessionId
-        String sessionId = WebUtils.toHttp(request).getHeader(SESSION_HEADER_KEY);
+        String sessionId = WebUtils.toHttp(request).getHeader(sessionHeaderKey);
         if (StringUtils.isNoneBlank(sessionId)) {
-            request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_SOURCE, REFERENCED_SESSION_ID_SOURCE);
+            request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_SOURCE, referencedSessionIdSource);
             request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID, sessionId);
             request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_IS_VALID, Boolean.TRUE);
             return sessionId;

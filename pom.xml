@@ -34,7 +34,7 @@
         <poitl.version>1.6.0-beta1</poitl.version>
         <shiro.version>1.4.1</shiro.version>
         <my.version>0.0.1-SNAPSHOT</my.version>
-        <quartz.version>2.3.0</quartz.version>
+        <quartz.version>2.3.2</quartz.version>
         <redisson.version>3.11.6</redisson.version>
         <hutool.version>5.0.7</hutool.version>
     </properties>

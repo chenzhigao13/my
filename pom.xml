@@ -29,7 +29,7 @@
         <mysql.version>8.0.16</mysql.version>
         <common-fileupload.version>1.4</common-fileupload.version>
         <commons-lang3.version>3.5</commons-lang3.version>
-        <gson.version>2.8.5</gson.version>
+        <gson.version>2.8.9</gson.version>
         <easypoi.version>4.0.0</easypoi.version>
         <poitl.version>1.6.0-beta1</poitl.version>
         <shiro.version>1.4.1</shiro.version>
